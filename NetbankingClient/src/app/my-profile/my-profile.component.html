@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h2>My Profile</h2>
+</div>
+<div class="col-md-offset-2 col-md-6 card-5" style="text-align:left; padding:2em;">
+  <h3 style="text-align: center">{{user?.fname|uppercase}} {{user?.mname|uppercase}} {{user?.lname|uppercase}} </h3>
+  <hr>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6" style="text-align:left;">
+      <strong>User Name:</strong><br/>
+      <strong>First Name:</strong><br/>
+      <strong>Last Name:</strong><br/>
+      <strong>PAN Number:</strong><br/>
+      <strong>Aadhaar Number:</strong><br/>
+      <strong>Mobile Number:</strong><br/>
+      <strong>Email-ID</strong><br/>
+       <strong>Address</strong>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+      {{user?.userName}}<br/>
+      {{user?.fname}}<br/>
+      {{user?.lname}}<br/>
+      {{user?.pancardNum}}<br/>
+       {{user?.aadharNum}}<br/>
+        {{user?.phone}}<br/>
+        {{user?.email}}<br/>
+         {{user?.address.street|lowercase}} street, {{user?.address.state|lowercase}}-{{user?.address.pincode|lowercase}}
+    </div>
+  </div>
+</div>

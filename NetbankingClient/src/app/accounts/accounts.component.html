@@ -1,0 +1,98 @@
+<div class="page-header">
+  <h2> Manage Accounts</h2>
+</div>
+
+<div class="table-responsive container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Account Number</th>
+				<th>Account Type</th>
+				<th>Balance</th>
+				<th>Opening Date</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+			<tr *ngFor="let account of accounts">
+				<td>{{account.accountNum}}</td>
+				<td>{{account.type}}</td>
+				<td>{{account.balance}}</td>
+				<td>{{account.openingDate}}</td>
+				<td><button (click)="onAccountSelected(account.accountNum)"
+						class="btn btn-success btn-sm">
+						<span class="glyphicon"></span>{{transactionButtonValue}}
+					</button></td>
+					<td><button 
+						class="btn btn-success btn-sm">
+						<span class="glyphicon"></span> Download transactions
+					</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<br />
+<br />
+<br />
+<div *ngIf="isAccountSelected" class="table-responsive .info container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Transaction Id</th>
+				<th>From Account</th>
+				<th>To Account</th>
+				<th>Time stamp</th>
+				<th>Amount</th>
+				<th>Description</th>
+				<th>Type</th>
+			</tr>
+		</thead>
+		<tbody>
+		<!--    {"tranferId":1,"amount":10.0,"timeStamp":"2017-07-19 03:30 AM","fromAccount":{"accNum":"12"},"toAccount":{"accNum":"21"},"description":null} -->
+		
+			<tr *ngFor="let transaction of transactions" [class.success]="!(transaction.fromAccount.accNum===this.selectedAccount)" [class.danger]="transaction.fromAccount.accNum===this.selectedAccount">
+				<td>{{transaction.tranferId}}</td>
+				<td>{{transaction.fromAccount.accNum}}</td>
+				<td>{{transaction.toAccount.accNum}}</td>
+				<td>{{transaction.timeStamp}}</td>
+				<td>{{transaction.amount}}</td>
+				<td>{{transaction.description}}</td>
+				<td *ngIf="transaction.fromAccount.accNum===this.selectedAccount">Debited</td>
+				<td *ngIf="!(transaction.fromAccount.accNum===this.selectedAccount)">Credited</td>
+
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<br />
+<br />
+<br />
+<button class="btn btn-primary"
+	(click)="updateSelectedBeneficiary(beneficiary.accountNum)"
+	data-toggle="modal" data-target="#myConfirmModal" type="button"
+	class="btn btn-primary btn-sm">Add Account</button>
+<div class="modal fade" id="myConfirmModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Delete Beneficiary</h4>
+			</div>
+			<div class="modal-body">
+				<a>Are you sure you want to delete?</a>
+			</div>
+
+			<div class="modal-footer">
+
+				<button type="button" (click)="deleteBen()" data-dismiss="modal"
+					class="btn btn-primary">Yes</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
